@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS main_db;
 USE main_db;
 
--- staaf
 CREATE TABLE staff (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -14,7 +13,6 @@ CREATE TABLE staff (
     INDEX idx_name (name)
 );
 
--- shifts info
 CREATE TABLE shifts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     day DATE NOT NULL,
@@ -26,11 +24,9 @@ CREATE TABLE shifts (
     INDEX idx_day (day),
     INDEX idx_role (role),
     INDEX idx_day_role (day, role),
-    -- Ensure end_time is after start_time
     CONSTRAINT chk_time_order CHECK (end_time > start_time)
 );
 
--- assignments tracking
 CREATE TABLE shift_assignments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     shift_id INT NOT NULL,
@@ -43,15 +39,14 @@ CREATE TABLE shift_assignments (
     INDEX idx_staff_id (staff_id)
 );
 
--- sample staff
+-- some sample data to test with
 INSERT INTO staff (name, role, phone, email) VALUES
-('John Smith', 'manager', '555-0101', 'john.smith@restaurant.com'),
-('Sarah Johnson', 'server', '555-0102', 'sarah.johnson@restaurant.com'),
-('Mike Davis', 'cook', '555-0103', 'mike.davis@restaurant.com'),
-('Lisa Wilson', 'server', '555-0104', 'lisa.wilson@restaurant.com'),
-('Tom Brown', 'cook', '555-0105', 'tom.brown@restaurant.com');
+('Test Manager', 'manager', '123-456-789', 'test.manager@test.com'),
+('Test Server1', 'server', '456-456-789', 'test.server1@test.com'),
+('Test Cook1', 'cook', '654-456-674', 'test.cook1@test.com'),
+('Test Server2', 'server', '357-245-124', 'test.server2@test.com'),
+('Test Cook2', 'cook', '543-234-213', 'test.cook2@test.com');
 
--- sample shifts
 INSERT INTO shifts (day, start_time, end_time, role) VALUES
 (CURDATE(), '09:00:00', '17:00:00', 'manager'),
 (CURDATE(), '10:00:00', '18:00:00', 'server'),
@@ -63,11 +58,10 @@ INSERT INTO shifts (day, start_time, end_time, role) VALUES
 (DATE_ADD(CURDATE(), INTERVAL 2 DAY), '10:00:00', '18:00:00', 'server'),
 (DATE_ADD(CURDATE(), INTERVAL 2 DAY), '08:00:00', '16:00:00', 'cook');
 
--- sample assignments
 INSERT INTO shift_assignments (shift_id, staff_id) VALUES
-(1, 1), -- John Smith assigned to manager shift
-(2, 2), -- Sarah Johnson assigned to server shift
-(3, 3), -- Mike Davis assigned to cook shift
-(4, 1), -- John Smith assigned to next day manager shift
-(5, 4), -- Lisa Wilson assigned to next day server shift
-(6, 5); -- Tom Brown assigned to next day cook shift
+(1, 1), -- Test Manager assigned to manager shift
+(2, 2), -- Test Server1 assigned to server shift
+(3, 3), -- Test Cook1 assigned to cook shift
+(4, 1), -- Test Manager assigned to next day manager shift
+(5, 4), -- Test Server2 assigned to next day server shift
+(6, 5); -- Test Cook2 assigned to next day cook shift

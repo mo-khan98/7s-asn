@@ -10,6 +10,6 @@ class CreateStaffHandler {
     public function handle(CreateStaffCommand $command) {
         $stmt = $this->db->prepare("INSERT INTO staff (name, role, phone, email) VALUES (?, ?, ?, ?)");
         $stmt->execute([$command->name, $command->role, $command->phone, $command->email]);
-        return $this->db->lastInsertId();
+        return (int)$this->db->lastInsertId();
     }
 } 
