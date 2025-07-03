@@ -4,6 +4,7 @@ Having previously interned at 7shifts, my goal was to match the 7shifts tech sta
 
 I did not work on this assignment in one sitting, but the total time I spent on it is roughly between 5-6 hours.
 
+Please reach out to me at mabdullahk98@gmail.com if you run into any issues with the project or if you have any other questions. I look forward to discussing it in more detail.
 
 ## Tech Stack
 
