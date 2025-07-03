@@ -36,20 +36,19 @@ I have fully containerized the assignment with Docker so that you can test it ea
    ```bash
    docker-compose up --build
    ```
-3. You can now access:
-   - **Frontend:** [http://localhost:3000](http://localhost:3000)
-   - **Backend:** [http://localhost:8000/api](http://localhost:8000/api)
-   - **MySQL:** localhost:3306 (user: `user`, pass: `pass`, db: `main_db`)
+3. You can now access the frontend for the app at: [http://localhost:3000](http://localhost:3000). I have included some sample data in the app to play around with.
 
 ## Running the Tests
 
 Run the following commands in terminal or powershell:
 ### Backend Tests
+While the docker containers are running, in a new terminal run:
 1. `docker-compose exec backend bash`
 2. `composer install`
 3. `vendor/bin/phpunit`
 
 ### Frontend Tests
-1. `docker-compose exec frontend bash`
+The frontend tests will have to be run locally on your computer. Install Node.js and npm on your computer, then in the root dirctory of the repo run:
+1. `cd frontend`
 2. `npm install`
 3. `npm test` 

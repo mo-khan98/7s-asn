@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'restaurant-scheduler/backend',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '25ce078d3075ff6109ac70597474ce04a8500cab',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -101,9 +101,9 @@
             'dev_requirement' => true,
         ),
         'restaurant-scheduler/backend' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '25ce078d3075ff6109ac70597474ce04a8500cab',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
