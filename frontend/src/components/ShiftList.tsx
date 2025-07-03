@@ -4,11 +4,14 @@ import type { Assignment } from '../types/Assignment';
 import { shiftService } from '../services/shiftService';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { AssignShiftModal } from './AssignShiftModal';
 
 export function ShiftList() {
   const [shifts, setShifts] = useState<Shift[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [assignModalOpen, setAssignModalOpen] = useState(false);
+  const [selectedShift, setSelectedShift] = useState<Shift | null>(null);
 
   useEffect(() => {
     loadData();
@@ -31,6 +34,15 @@ export function ShiftList() {
 
   const getAssignmentForShift = (shiftId: number) => {
     return assignments.find(a => a.shift_id === shiftId);
+  };
+
+  const handleAssignClick = (shift: Shift) => {
+    setSelectedShift(shift);
+    setAssignModalOpen(true);
+  };
+
+  const handleAssignmentComplete = () => {
+    loadData();
   };
 
   if (loading) {
@@ -58,7 +70,11 @@ export function ShiftList() {
                       <p className="text-sm text-green-600">Assigned to: {assignment.staff_name}</p>
                     )}
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => handleAssignClick(shift)}
+                  >
                     {assignment ? 'Reassign' : 'Assign'}
                   </Button>
                 </div>
@@ -67,6 +83,21 @@ export function ShiftList() {
           })}
         </div>
       </CardContent>
+      
+      {selectedShift && (
+        <AssignShiftModal
+          isOpen={assignModalOpen}
+          onClose={() => {
+            setAssignModalOpen(false);
+            setSelectedShift(null);
+          }}
+          shiftId={selectedShift.id}
+          shiftRole={selectedShift.role}
+          shiftDay={new Date(selectedShift.day).toLocaleDateString()}
+          shiftTime={`${selectedShift.start_time} - ${selectedShift.end_time}`}
+          onAssigned={handleAssignmentComplete}
+        />
+      )}
     </Card>
   );
 } 
